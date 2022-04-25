@@ -1,37 +1,19 @@
-import './App.css';
-import headerLogoPath from '../src/images/header-logo.svg'
+import '../App.css';
+import headerLogoPath from '../images/header-logo.svg'
+import Footer from "./Footer";
+import Header from "./Header";
+import Main from "./Main";
+import Page from "./Page";
 
 function App() {
   return (
     <>
-        <div className="page-container">
-                <header className="header">
-                    <img src={headerLogoPath} alt="Логотип в виде надписи MESTO"
-                         className="header__logo"/>
-                </header>
-                <main className="main">
-                    <section className="profile">
-                        <div className="profile__info-container">
-                            <div className="profile__avatar-container">
-                                <img src="#" alt="Картинка профиля" className="profile__avatar"/>
-                            </div>
-                            <div className="profile__info">
-                                <div className="profile__info-name-container">
-                                    <h1 className="profile__info-name"/>
-                                    <button type="button" className="profile__info-edit-button"/>
-                                </div>
-                                <p className="profile__info-rank"/>
-                            </div>
-                        </div>
-                        <button type="button" className="profile__add-button"/>
-                    </section>
-                    <section className="places">
-                    </section>
-                </main>
-                <footer className="footer">
-                    <p className="footer__copyright">&copy;2021 Mesto Russia.</p>
-                </footer>
-        </div>
+        {/*<div className="page-container">*/}
+        {/*        <Header/>*/}
+        {/*        <Main/>*/}
+        {/*        <Footer/>*/}
+        {/*</div>*/}
+        <Page/>
         <div className="popup popup_type_edit">
             <div className="popup__container">
                 <button type="button" className="popup__close"/>
