@@ -22,6 +22,7 @@
 @import url(../src/blocks/profile/__info-edit-button-icon/profile__info-edit-button-icon.css);
 @import url(../src/blocks/profile/__add-button-icon/profile__add-button-icon.css);
 @import url(../src/blocks/profile/__add-button/profile__add-button.css);
+@import url(../src/blocks/profile/__avatar-button/profile__avatar-button.css);
 
 @import url(../src/blocks/places/places.css);
 @import url(../src/blocks/place/place.css);

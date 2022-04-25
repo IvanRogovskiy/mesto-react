@@ -1,18 +1,10 @@
 import '../App.css';
-import headerLogoPath from '../images/header-logo.svg'
-import Footer from "./Footer";
-import Header from "./Header";
-import Main from "./Main";
 import Page from "./Page";
+import '../index.css'
 
 function App() {
   return (
     <>
-        {/*<div className="page-container">*/}
-        {/*        <Header/>*/}
-        {/*        <Main/>*/}
-        {/*        <Footer/>*/}
-        {/*</div>*/}
         <Page/>
         <div className="popup popup_type_edit">
             <div className="popup__container">
