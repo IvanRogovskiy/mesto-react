@@ -1,11 +1,10 @@
-
 import React from "react";
 import cardDeletePath from "../images/place-delete.svg";
 
 const Card = (props) => {
   return (
       <div className="place">
-          <img alt="Изображение места" src={props.card.link} className="place__image"/>
+          <img alt="Изображение места" src={props.card.link} className="place__image" onClick={props.onImageClick} />
           <div className="place__info">
               <h2 className="place__name">{props.card.name}</h2>
               <div className="place__fav-container">
