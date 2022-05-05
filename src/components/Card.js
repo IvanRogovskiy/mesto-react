@@ -2,7 +2,7 @@ import React from "react";
 import cardDeletePath from "../images/place-delete.svg";
 import {CurrentUserContext} from "../contexts/currentUserContext";
 
-const Card = ({card, onImageClick, onCardLike}) => {
+const Card = ({card, onImageClick, onCardLike, onCardDelete}) => {
 
   const handleCardClick = () => {
     onImageClick(card)
@@ -22,6 +22,10 @@ const Card = ({card, onImageClick, onCardLike}) => {
       onCardLike(card)
     }
 
+    const handleDeleteClick = () => {
+      onCardDelete(card);
+    }
+
     return (
       <div className="place">
           <img alt="Изображение места" src={card.link} className="place__image" onClick={handleCardClick} />
@@ -32,7 +36,7 @@ const Card = ({card, onImageClick, onCardLike}) => {
                   <p className="place__fav-counter">{card.likes.length}</p>
               </div>
           </div>
-          <img alt="Кнопка удаления карточки" src={cardDeletePath}
+          <img alt="Кнопка удаления карточки" onClick={handleDeleteClick} src={cardDeletePath}
                className={cardDeleteButtonClassName}/>
       </div>
   )

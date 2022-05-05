@@ -22,7 +22,12 @@ const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
         api.removeLike(card._id).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
         })
+    }
 
+    const handleCardDelete = (card) => {
+        api.deleteCard(card._id).then(() => {
+            setCards((state) => state.filter((c) => c._id !== card._id))
+        })
     }
 
     React.useEffect(() => {
@@ -53,7 +58,7 @@ const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
             </section>
             <section className="places">
                 {cards.map((card) =>
-                        <Card card={card} onImageClick={onCardClick} onCardLike={handleCardLike} key={card._id}/>
+                        <Card card={card} onImageClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} key={card._id}/>
                 )}
             </section>
         </main>
