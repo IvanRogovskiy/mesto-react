@@ -1,23 +1,13 @@
 import React from 'react'
+import { CurrentUserContext } from '../contexts/currentUserContext';
 import api from "../utils/Api";
 import Card from "./Card";
 
 const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
 
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
     const [cards, setCards] = React.useState([]);
 
-    React.useEffect(() => {
-        api.getMyProfileInfo()
-            .then((userData) => {
-                setUserName(userData.name);
-                setUserDescription(userData.avatar);
-                setUserAvatar(userData.avatar)
-            })
-            .catch(err => console.log(err))
-    }, [])
+    const currentUser = React.useContext(CurrentUserContext)
 
     React.useEffect(() => {
         api.getUsersCards()
@@ -32,15 +22,15 @@ const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
             <section className="profile">
                 <div className="profile__info-container">
                     <div className="profile__avatar-container">
-                        {userAvatar && (<img src={userAvatar} alt="Картинка профиля" className="profile__avatar"/>)}
+                        {currentUser.avatar && (<img src={currentUser.avatar} alt="Картинка профиля" className="profile__avatar"/>)}
                         <button onClick={onEditAvatar} type="button" className="profile__avatar-button"/>
                     </div>
                     <div className="profile__info">
                         <div className="profile__info-name-container">
-                            <h1 className="profile__info-name">{userName}</h1>
+                            <h1 className="profile__info-name">{currentUser.name}</h1>
                             <button type="button" onClick={onEditProfile} className="profile__info-edit-button"/>
                         </div>
-                        <p className="profile__info-rank">{userDescription}</p>
+                        <p className="profile__info-rank">{currentUser.about}</p>
                     </div>
                 </div>
                 <button type="button" onClick={onAddPlace} className="profile__add-button"/>
