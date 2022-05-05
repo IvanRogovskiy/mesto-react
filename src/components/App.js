@@ -8,6 +8,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/currentUserContext';
+import EditProfilePopup from "./EditProfilePopup";
 
 const App = () => {
 
@@ -47,6 +48,13 @@ const App = () => {
             name: card.name ,
             link: card.link,
         })
+    }
+    
+    const handleUpdateUser = ({name, about}) => {
+      api.updateUserInfo({name, about})
+          .then(data => setCurrentUser({currentUser, ...data}))
+          .catch(err => console.log(err))
+      closeAllPopups();
     }
 
     React.useEffect(() => {
@@ -89,27 +97,11 @@ const App = () => {
                     <input type="submit" className="popup__save" value="Создать"/>
                 </>
                 </PopupWithForm>
-            <PopupWithForm
-                name='name'
-                title='Редактировать профиль'
+            <EditProfilePopup
+                isOpened={isEditProfilePopupOpen}
                 onClose={closeAllPopups}
-                isOpened={isEditProfilePopupOpen}>
-                <>
-                    <label className="popup__field">
-                        <input className="popup__input popup__input_type_name" name="name"
-                            type="text" placeholder="Имя" id="name" defaultValue="" autoComplete="off"
-                            minLength="2" maxLength="40" required/>
-                        <span className="popup__input-error name-input-error"/>
-                    </label>
-                    <label className="popup__field">
-                        <input className="popup__input popup__input_type_rank" name="rank" autoComplete="off"
-                            type="text" id="rank" placeholder="Профессиональная деятельность"
-                            minLength="2" maxLength="200" required/>
-                        <span className="popup__input-error rank-input-error"/>
-                    </label>
-                    <input type="submit" className="popup__save" value="Сохранить"/>
-                </>
-            </PopupWithForm>
+                onUserUpdate={handleUpdateUser}
+            />
             <PopupWithForm
                 name='edit'
                 title='Редактировать аватар'
