@@ -7,7 +7,23 @@ const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
 
     const [cards, setCards] = React.useState([]);
 
-    const currentUser = React.useContext(CurrentUserContext)
+    const currentUser = React.useContext(CurrentUserContext);
+
+    const handleCardLike = (card) => {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        if (!isLiked) {
+            api.addLike(card._id).then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            });
+        }
+        api.removeLike(card._id).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+        })
+
+    }
 
     React.useEffect(() => {
         api.getUsersCards()
@@ -37,7 +53,7 @@ const Main = ({onEditAvatar, onEditProfile, onCardClick, onAddPlace}) => {
             </section>
             <section className="places">
                 {cards.map((card) =>
-                        <Card card={card} onImageClick={onCardClick} key={card._id}/>
+                        <Card card={card} onImageClick={onCardClick} onCardLike={handleCardLike} key={card._id}/>
                 )}
             </section>
         </main>

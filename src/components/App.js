@@ -11,7 +11,7 @@ import { CurrentUserContext } from '../contexts/currentUserContext';
 
 const App = () => {
 
-    const [currentUser, setCurrentUser] = React.useState();
+    const [currentUser, setCurrentUser] = React.useState({});
 
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -21,15 +21,6 @@ const App = () => {
         name: "",
         link: ""
     });
-
-    React.useEffect(() => {
-        api.getMyProfileInfo()
-        .then((userData) => {
-            console.log(userData);
-            setCurrentUser(userData)
-        })
-        .catch(err => console.log(err))
-    }, [])
 
     const handleEditAvatarClick = () => {
         setIsEditAvatarPopupOpen(true);
@@ -57,6 +48,15 @@ const App = () => {
             link: card.link,
         })
     }
+
+    React.useEffect(() => {
+        api.getMyProfileInfo()
+            .then((userData) => {
+                console.log(userData);
+                setCurrentUser(userData)
+            })
+            .catch(err => console.log(err))
+    }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
