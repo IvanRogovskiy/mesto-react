@@ -28,7 +28,7 @@ const Card = ({card, onImageClick, onCardLike, onCardDelete}) => {
 
     return (
       <div className="place">
-          <img alt="Изображение места" src={card.link} className="place__image" onClick={handleCardClick} />
+          <img alt={card.name} src={card.link} className="place__image" onClick={handleCardClick} />
           <div className="place__info">
               <h2 className="place__name">{card.name}</h2>
               <div className="place__fav-container">

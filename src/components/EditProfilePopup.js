@@ -25,9 +25,11 @@ const EditProfilePopup = ({isOpened, onClose, onUserUpdate}) => {
   }
 
   React.useEffect(() => {
-      setName(currentUser.name);
-      setDescription(currentUser.about);
-  }, [currentUser])
+      setName(currentUser.name || '');
+      setDescription(currentUser.about || '');
+  }, [currentUser, isOpened])
+
+    console.log('name', name)
 
   return (
       <PopupWithForm
@@ -38,14 +40,14 @@ const EditProfilePopup = ({isOpened, onClose, onUserUpdate}) => {
           onSubmit={handleSubmit}
       >
               <label className="popup__field">
-                  <input className="popup__input popup__input_type_name" name="name" value={currentUser.name}
-                         type="text" placeholder="Имя" id="name" autoComplete="off"
+                  <input className="popup__input popup__input_type_name" name="name"
+                         type="text" placeholder="Имя" id="name" autoComplete="off" value={name}
                          minLength="2" maxLength="40" onChange={onNameChange} required/>
                   <span className="popup__input-error name-input-error"/>
               </label>
               <label className="popup__field">
                   <input className="popup__input popup__input_type_rank" name="rank" autoComplete="off"
-                         type="text" id="rank" placeholder="Профессиональная деятельность" value={currentUser.about}
+                         type="text" id="rank" placeholder="Профессиональная деятельность" value={description}
                          minLength="2" maxLength="200" onChange={onDescriptionChange} required/>
                   <span className="popup__input-error rank-input-error"/>
               </label>
