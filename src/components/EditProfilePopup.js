@@ -38,14 +38,14 @@ const EditProfilePopup = ({isOpened, onClose, onUserUpdate}) => {
           onSubmit={handleSubmit}
       >
               <label className="popup__field">
-                  <input className="popup__input popup__input_type_name" name="name" value={name}
-                         type="text" placeholder="Имя" id="name" defaultValue="" autoComplete="off"
+                  <input className="popup__input popup__input_type_name" name="name" value={currentUser.name}
+                         type="text" placeholder="Имя" id="name" autoComplete="off"
                          minLength="2" maxLength="40" onChange={onNameChange} required/>
                   <span className="popup__input-error name-input-error"/>
               </label>
               <label className="popup__field">
                   <input className="popup__input popup__input_type_rank" name="rank" autoComplete="off"
-                         type="text" id="rank" placeholder="Профессиональная деятельность" value={description}
+                         type="text" id="rank" placeholder="Профессиональная деятельность" value={currentUser.about}
                          minLength="2" maxLength="200" onChange={onDescriptionChange} required/>
                   <span className="popup__input-error rank-input-error"/>
               </label>
