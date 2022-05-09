@@ -69,7 +69,7 @@ const App = () => {
     const handlePlaceAdd = ({name, link}) => {
         api.addNewCard({name, link})
             .then(newCard => {
-                setCards([...cards, newCard])
+                setCards([newCard, ...cards])
             })
             .catch(err => console.log(err))
         closeAllPopups();
@@ -83,11 +83,13 @@ const App = () => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
             })
                 .catch(err => console.log(err));
+        } else {
+            api.removeLike(card._id)
+                .then((newCard) => {
+                    setCards((state) => state.map((c) => c._id === card._id ? newCard : c))})
+                .catch(err => console.log(err))
         }
-        api.removeLike(card._id)
-            .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c))})
-            .catch(err => console.log(err))
+
     }
 
     const handleCardDelete = (card) => {
@@ -112,7 +114,7 @@ const App = () => {
                 setCards(userCards)
             })
             .catch(err => console.log(err))
-    })
+    }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
